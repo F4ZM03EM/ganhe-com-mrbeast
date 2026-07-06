@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resgatar prêmio · Programa MrBeast Money</title>
+    <style>
+        /* Reset e estilos base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #ffffff;
+            min-height: 100svh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Logo */
+        .logo {
+            height: 64px;
+            width: auto;
+        }
+
+        @media (min-width: 640px) {
+            .logo {
+                height: 96px;
+            }
+        }
+
+        /* Formulário */
+        .form {
+            margin-top: 12px;
+            width: 100%;
+            max-width: 448px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* Títulos */
+        .form-title {
+            font-size: 1.25rem;
+            font-weight: 900;
+            color: #171717;
+            text-align: center;
+        }
+
+        @media (min-width: 640px) {
+            .form-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        .form-subtitle {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #525252;
+        }
+
+        @media (min-width: 640px) {
+            .form-subtitle {
+                font-size: 0.875rem;
+            }
+        }
+
+        .form-subtitle b {
+            color: #171717;
+        }
+
+        /* Campos do formulário */
+        .field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .field-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #737373;
+        }
+
+        /* Métodos de pagamento - 3 opções */
+        .methods-grid {
+            margin-top: 4px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .method-btn {
+            padding: 10px 8px;
+            border-radius: 16px;
+            border: 2px solid #e5e5e5;
+            background-color: #ffffff;
+            font-weight: 700;
+            font-size: 0.75rem;
+            color: #404040;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .method-btn:hover {
+            border-color: #dc2626;
+            background-color: #fef2f2;
+        }
+
+        .method-btn.active {
+            border-color: #dc2626;
+            background-color: #fef2f2;
+            color: #dc2626;
+        }
+
+        .method-btn .method-icon {
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        /* Input */
+        .field-input {
+            margin-top: 4px;
+            width: 100%;
+            padding: 10px 16px;
+            border-radius: 16px;
+            border: 1px solid #d4d4d4;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .field-input:focus {
+            border-color: #dc2626;
+        }
+
+        .field-input::placeholder {
+            color: #a3a3a3;
+        }
+
+        .field-input.error {
+            border-color: #dc2626;
+            background-color: #fef2f2;
+        }
+
+        /* Mensagem de erro */
+        .error-message-input {
+            color: #dc2626;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: none;
+            margin-top: 4px;
+        }
+
+        .error-message-input.visible {
+            display: block;
+        }
+
+        /* Botão Confirmar */
+        .btn-confirm {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 12px 32px;
+            height: 48px;
+            border: none;
+            border-radius: 16px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: white;
+            background: #dc2626;
+            box-shadow: 0 10px 15px -3px rgba(220, 38, 38, 0.3);
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        @media (min-width: 640px) {
+            .btn-confirm {
+                height: 56px;
+                font-size: 1.125rem;
+            }
+        }
+
+        .btn-confirm:hover:not(:disabled) {
+            transform: scale(1.02);
+            box-shadow: 0 15px 20px -5px rgba(220, 38, 38, 0.4);
+        }
+
+        .btn-confirm:active:not(:disabled) {
+            transform: scale(0.98);
+        }
+
+        .btn-confirm:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* PÁGINA DE FALHA (embutida) */
+        .error-page {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100svh;
+            background-color: #ffffff;
+            padding: 16px;
+            width: 100%;
+        }
+
+        .error-page.visible {
+            display: flex;
+        }
+
+        .error-card {
+            margin-top: 16px;
+            width: 100%;
+            max-width: 448px;
+            border-radius: 24px;
+            border: 2px solid #dc2626;
+            background-color: #fef2f2;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .error-icon {
+            margin: 0 auto;
+            width: 48px;
+            height: 48px;
+            color: #dc2626;
+        }
+
+        .error-title {
+            margin-top: 8px;
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: -0.025em;
+            color: #b91c1c;
+        }
+
+        @media (min-width: 640px) {
+            .error-title {
+                font-size: 1.875rem;
+            }
+        }
+
+        .error-subtitle {
+            margin-top: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #dc2626;
+        }
+
+        .error-message {
+            margin-top: 12px;
+            font-size: 0.875rem;
+            color: #404040;
+        }
+
+        @media (min-width: 640px) {
+            .error-message {
+                font-size: 1rem;
+            }
+        }
+
+        .error-message b {
+            color: #171717;
+        }
+
+        .btn-withdraw-error {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            max-width: 448px;
+            margin-top: 16px;
+            padding: 12px 32px;
+            height: 48px;
+            border: none;
+            border-radius: 16px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: white;
+            background: #dc2626;
+            box-shadow: 0 10px 15px -3px rgba(220, 38, 38, 0.3);
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        @media (min-width: 640px) {
+            .btn-withdraw-error {
+                height: 56px;
+                font-size: 1.125rem;
+            }
+        }
+
+        .btn-withdraw-error:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 20px -5px rgba(220, 38, 38, 0.4);
+        }
+
+        .btn-withdraw-error:active {
+            transform: scale(0.98);
+        }
+
+        /* Ícones SVG */
+        .icon-error {
+            width: 48px;
+            height: 48px;
+            stroke: #dc2626;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+
+        /* Responsividade */
+        @media (max-width: 480px) {
+            .methods-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .method-btn {
+                font-size: 0.65rem;
+                padding: 8px 4px;
+            }
+            .method-btn .method-icon {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- PÁGINA PRINCIPAL - FORMULÁRIO DE SAQUE -->
+    <div id="formPage" class="container">
+        <!-- Logo -->
+        <img src="../imagem/mrbeast-logo.png" alt="Mr Beast Money Program" class="logo">
+
+        <!-- Formulário -->
+        <form class="form" id="withdrawForm">
+            <h1 class="form-title">Dados para saque</h1>
+            <p class="form-subtitle">Sacar <b>$300,00</b> via carteira móvel</p>
+
+            <!-- Método de saque -->
+            <div class="field-group">
+                <label class="field-label">Método de saque</label>
+                <div class="methods-grid">
+                    <button type="button" class="method-btn active" data-method="M-Pesa" data-placeholder="84/85 XXX XXXX">
+                        <span class="method-icon">📱</span>
+                        M-Pesa
+                    </button>
+                    <button type="button" class="method-btn" data-method="e-Mola" data-placeholder="86/87 XXX XXXX">
+                        <span class="method-icon">💰</span>
+                        e-Mola
+                    </button>
+                    <button type="button" class="method-btn" data-method="VISA" data-placeholder="NIB/NUMERO">
+                        <span class="method-icon">💳</span>
+                        VISA
+                    </button>
+                </div>
+            </div>
+
+            <!-- Número para saque -->
+            <div class="field-group">
+                <label class="field-label">Número para saque</label>
+                <input 
+                    type="tel" 
+                    class="field-input" 
+                    placeholder="84/85 XXX XXXX"
+                    inputmode="numeric"
+                    id="phoneInput"
+                >
+                <span class="error-message-input" id="errorMsg">⚠️ Por favor, insira um número válido</span>
+            </div>
+
+            <!-- Botão Confirmar -->
+            <button type="button" class="btn-confirm" id="confirmBtn" disabled>
+                Confirmar saque
+            </button>
+        </form>
+    </div>
+
+    <!-- PÁGINA DE FALHA (oculta inicialmente) -->
+    <div id="errorPage" class="error-page">
+        <!-- Logo -->
+        <img src="../imagem/mrbeast-logo.png" alt="Mr Beast Money Program" class="logo">
+
+        <!-- Card de erro -->
+        <div class="error-card">
+            <svg class="icon-error" viewBox="0 0 24 24">
+                <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path>
+                <path d="M12 9v4"></path>
+                <path d="M12 17h.01"></path>
+            </svg>
+            <h1 class="error-title">Falha no saque</h1>
+            <p class="error-subtitle">Motivos Fiscais</p>
+            <p class="error-message">
+                Seu saque de <b>$300.00</b> para <b id="errorMethod">M-Pesa</b> <b id="errorPhone">84 123 4567</b> não pôde ser processado. Assista ao vídeo abaixo para saber como levantar seu dinheiro.
+            </p>
+        </div>
+
+        <!-- Botão Sacar - REDIRECIONA PARA "final/index.html" -->
+        <a href="../final/index.html" class="btn-withdraw-error">
+            Sacar
+        </a>
+    </div>
+
+    <script>
+        // Selecionar elementos
+        const methodButtons = document.querySelectorAll('.method-btn');
+        const phoneInput = document.getElementById('phoneInput');
+        const confirmBtn = document.getElementById('confirmBtn');
+        const errorMsg = document.getElementById('errorMsg');
+        
+        let selectedMethod = 'M-Pesa';
+        let selectedPhone = '';
+
+        // Placeholders por método
+        const placeholders = {
+            'M-Pesa': '84/85 XXX XXXX',
+            'e-Mola': '86/87 XXX XXXX',
+            'VISA': 'XXXX XXXX XXXX XXXX'
+        };
+
+        // Função para validar o campo
+        function validatePhone() {
+            const value = phoneInput.value.trim();
+            if (value.length === 0) {
+                confirmBtn.disabled = true;
+                phoneInput.classList.add('error');
+                errorMsg.classList.add('visible');
+                return false;
+            } else {
+                confirmBtn.disabled = false;
+                phoneInput.classList.remove('error');
+                errorMsg.classList.remove('visible');
+                return true;
+            }
+        }
+
+        // Clique nos métodos - limpa o campo e atualiza placeholder
+        methodButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                methodButtons.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                selectedMethod = this.dataset.method;
+                
+                // Limpa o campo
+                phoneInput.value = '';
+                selectedPhone = '';
+                
+                // Atualiza o placeholder
+                const placeholder = this.dataset.placeholder || placeholders[selectedMethod];
+                phoneInput.placeholder = placeholder;
+                
+                // Remove erro e desabilita botão
+                phoneInput.classList.remove('error');
+                errorMsg.classList.remove('visible');
+                confirmBtn.disabled = true;
+                
+                // Foca no campo
+                phoneInput.focus();
+            });
+        });
+
+        // Validação em tempo real enquanto digita
+        phoneInput.addEventListener('input', function() {
+            selectedPhone = this.value;
+            validatePhone();
+        });
+
+        // Validação ao perder o foco
+        phoneInput.addEventListener('blur', function() {
+            validatePhone();
+        });
+
+        // Botão Confirmar - só funciona se o campo estiver preenchido
+        document.getElementById('confirmBtn').addEventListener('click', function() {
+            // Valida novamente antes de prosseguir
+            if (!validatePhone()) {
+                return; // Não prossegue se não tiver número
+            }
+            
+            // Pega o número digitado
+            const phone = selectedPhone || '84 123 4567';
+            
+            // Atualiza os dados na página de erro
+            document.getElementById('errorMethod').textContent = selectedMethod;
+            document.getElementById('errorPhone').textContent = phone;
+            
+            // Esconde o formulário e mostra a página de erro
+            document.getElementById('formPage').style.display = 'none';
+            document.getElementById('errorPage').classList.add('visible');
+        });
+
+        // Validação inicial (campo vazio)
+        validatePhone();
+    </script>
+</body>
+</html>

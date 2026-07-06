@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resgatar prêmio · MrBeast Money Program</title>
+    <style>
+        /* Reset e estilos base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #ffffff;
+            min-height: 100svh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Logo */
+        .logo {
+            height: 64px;
+            width: auto;
+        }
+
+        @media (min-width: 640px) {
+            .logo {
+                height: 96px;
+            }
+        }
+
+        /* Ícone de festa */
+        .party-icon {
+            margin-top: 12px;
+            width: 40px;
+            height: 40px;
+            color: #dc2626;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+
+        @media (min-width: 640px) {
+            .party-icon {
+                width: 48px;
+                height: 48px;
+            }
+        }
+
+        /* Títulos */
+        .title {
+            margin-top: 8px;
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: -0.025em;
+            color: #171717;
+            text-align: center;
+        }
+
+        @media (min-width: 640px) {
+            .title {
+                font-size: 2.25rem;
+            }
+        }
+
+        .subtitle {
+            margin-top: 4px;
+            max-width: 448px;
+            text-align: center;
+            font-size: 0.875rem;
+            color: #525252;
+        }
+
+        @media (min-width: 640px) {
+            .subtitle {
+                font-size: 1rem;
+            }
+        }
+
+        /* Card do saldo */
+        .balance-card {
+            margin-top: 16px;
+            width: 100%;
+            max-width: 448px;
+            padding: 16px 24px;
+            border-radius: 24px;
+            text-align: center;
+            color: white;
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        @media (min-width: 640px) {
+            .balance-card {
+                padding: 24px 32px;
+            }
+        }
+
+        .balance-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.9;
+        }
+
+        .balance-amount {
+            margin-top: 4px;
+            font-size: 2.25rem;
+            font-weight: 900;
+        }
+
+        @media (min-width: 640px) {
+            .balance-amount {
+                font-size: 3rem;
+            }
+        }
+
+        .balance-hint {
+            margin-top: 4px;
+            font-size: 0.75rem;
+            opacity: 0.9;
+        }
+
+        /* Botão Sacar */
+        .btn-withdraw {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            max-width: 448px;
+            margin-top: 16px;
+            padding: 12px 32px;
+            height: 48px;
+            border: none;
+            border-radius: 16px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: white;
+            background: #dc2626;
+            box-shadow: 0 10px 15px -3px rgba(220, 38, 38, 0.3);
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        @media (min-width: 640px) {
+            .btn-withdraw {
+                height: 56px;
+                font-size: 1.125rem;
+            }
+        }
+
+        .btn-withdraw:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 20px -5px rgba(220, 38, 38, 0.4);
+        }
+
+        .btn-withdraw:active {
+            transform: scale(0.98);
+        }
+
+        .btn-withdraw:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-withdraw svg {
+            width: 16px;
+            height: 16px;
+            pointer-events: none;
+            flex-shrink: 0;
+        }
+
+        /* SVG inline para o ícone de festa */
+        .icon-party-popper {
+            width: 40px;
+            height: 40px;
+            stroke: #dc2626;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+
+        @media (min-width: 640px) {
+            .icon-party-popper {
+                width: 48px;
+                height: 48px;
+            }
+        }
+
+        /* SVG inline para o ícone de saque */
+        .icon-withdraw {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Logo -->
+        <img src="../imagem/mrbeast-logo.png" alt="Mr Beast Money Program" class="logo">
+
+        <!-- Ícone de festa -->
+        <svg class="icon-party-popper" viewBox="0 0 24 24">
+            <path d="M5.8 11.3 2 22l10.7-3.79"></path>
+            <path d="M4 3h.01"></path>
+            <path d="M22 8h.01"></path>
+            <path d="M15 2h.01"></path>
+            <path d="M22 20h.01"></path>
+            <path d="m22 2-2.24.75a2.9 2.9 0 0 0-1.96 3.12c.1.86-.57 1.63-1.45 1.63h-.38c-.86 0-1.6.6-1.76 1.44L14 10"></path>
+            <path d="m22 13-.82-.33c-.86-.34-1.82.2-1.98 1.11c-.11.7-.72 1.22-1.43 1.22H17"></path>
+            <path d="m11 2 .33.82c.34.86-.2 1.82-1.11 1.98C9.52 4.9 9 5.52 9 6.23V7"></path>
+            <path d="M11 13c1.93 1.93 2.83 4.17 2 5-.83.83-3.07-.07-5-2-1.93-1.93-2.83-4.17-2-5 .83-.83 3.07.07 5 2Z"></path>
+        </svg>
+
+        <!-- Títulos -->
+        <h1 class="title">VOCÊ GANHOU!</h1>
+        <p class="subtitle">Você completou todas as tarefas do Money Program do MrBeast.</p>
+
+        <!-- Card do saldo -->
+        <div class="balance-card">
+            <div class="balance-label">Saldo disponível</div>
+            <div class="balance-amount">$300.00</div>
+            <div class="balance-hint">Pronto para saque.</div>
+        </div>
+
+        <!-- Botão Sacar - REDIRECIONA PARA "sacar/index.html" -->
+        <a href="../sacar/index.html" class="btn-withdraw">
+            Sacar agora
+            <svg class="icon-withdraw" viewBox="0 0 24 24">
+                <path d="M12 2v20"></path>
+                <path d="m5 9 7-7 7 7"></path>
+                <path d="M5 15l7 7 7-7"></path>
+            </svg>
+        </a>
+    </div>
+</body>
+</html>

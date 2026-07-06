@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚨 URGENTE: Como sacar seu prémio do Money Program (Passo a Passo)</title>
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #0f0f0f;
+            color: #f1f1f1;
+            min-height: 100vh;
+        }
+
+        /* Container principal */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 16px 48px;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 0 24px 48px;
+            }
+        }
+
+        /* Vídeo */
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            background-color: #000;
+            border-radius: 0;
+            overflow: hidden;
+        }
+
+        @media (min-width: 768px) {
+            .video-wrapper {
+                border-radius: 12px;
+                margin-top: 24px;
+            }
+        }
+
+        .video-wrapper video {
+            width: 100%;
+            display: block;
+        }
+
+        /* CTA BOTÃO - aparece após 3min45s (225s) */
+        .cta-container {
+            position: relative;
+            width: 100%;
+            padding: 16px 20px;
+            background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+            border-bottom: 3px solid #22c55e;
+            display: none;
+            text-align: center;
+            animation: slideDown 0.6s ease-out;
+        }
+
+        .cta-container.visible {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 16px 40px;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: #ffffff;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 8px 32px rgba(34, 197, 94, 0.4);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        @media (min-width: 640px) {
+            .cta-button {
+                font-size: 1.25rem;
+                padding: 18px 48px;
+            }
+        }
+
+        .cta-button:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 48px rgba(34, 197, 94, 0.6);
+        }
+
+        .cta-button:active {
+            transform: scale(0.97);
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 8px 32px rgba(34, 197, 94, 0.4);
+            }
+            50% {
+                box-shadow: 0 8px 48px rgba(34, 197, 94, 0.7);
+            }
+        }
+
+        .cta-button .icon {
+            font-size: 1.5rem;
+        }
+
+        .cta-text {
+            font-size: 0.75rem;
+            color: #86efac;
+            margin-top: 6px;
+        }
+
+        /* Conteúdo abaixo do vídeo */
+        .content {
+            padding: 0 12px;
+        }
+
+        @media (min-width: 768px) {
+            .content {
+                padding: 0;
+            }
+        }
+
+        /* Título */
+        .video-title {
+            margin-top: 12px;
+            font-size: 15px;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        @media (min-width: 768px) {
+            .video-title {
+                margin-top: 16px;
+                font-size: 1.25rem;
+                font-weight: 700;
+            }
+        }
+
+        /* Info do vídeo */
+        .video-meta {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 4px 8px;
+            margin-top: 4px;
+            font-size: 13px;
+            color: #aaaaaa;
+        }
+
+        @media (min-width: 768px) {
+            .video-meta {
+                font-size: 14px;
+            }
+        }
+
+        /* Canal */
+        .channel-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .channel-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 0;
+        }
+
+        .channel-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        @media (min-width: 768px) {
+            .channel-avatar {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        .channel-name {
+            font-weight: 500;
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        @media (min-width: 768px) {
+            .channel-name {
+                font-size: 15px;
+            }
+        }
+
+        .channel-badge {
+            width: 14px;
+            height: 14px;
+            fill: #aaaaaa;
+            flex-shrink: 0;
+        }
+
+        .channel-subs {
+            font-size: 12px;
+            color: #aaaaaa;
+        }
+
+        .subscribe-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: 9999px;
+            background-color: #272727;
+            color: #f1f1f1;
+            font-size: 14px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            flex-shrink: 0;
+        }
+
+        .subscribe-btn:hover {
+            background-color: #3a3a3a;
+        }
+
+        .subscribe-btn .bell {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Ações do vídeo */
+        .video-actions {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 12px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            flex-wrap: nowrap;
+        }
+
+        @media (min-width: 768px) {
+            .video-actions {
+                flex-wrap: wrap;
+            }
+        }
+
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 9999px;
+            background-color: #272727;
+            color: #f1f1f1;
+            font-size: 13px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        @media (min-width: 768px) {
+            .action-btn {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+        }
+
+        .action-btn:hover {
+            background-color: #3a3a3a;
+        }
+
+        .action-btn .icon {
+            width: 18px;
+            height: 18px;
+        }
+
+        @media (min-width: 768px) {
+            .action-btn .icon {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        .like-btn {
+            background-color: #3a3a3a;
+            border-radius: 9999px 0 0 9999px;
+            padding-right: 8px;
+        }
+
+        .like-btn .icon {
+            color: #3ea6ff;
+        }
+
+        .dislike-btn {
+            border-radius: 0 9999px 9999px 0;
+            padding-left: 8px;
+            border-left: 1px solid #3a3a3a;
+        }
+
+        /* Comentários */
+        .comments-section {
+            margin-top: 24px;
+        }
+
+        @media (min-width: 768px) {
+            .comments-section {
+                margin-top: 32px;
+            }
+        }
+
+        .comments-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .comments-header h2 {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        @media (min-width: 768px) {
+            .comments-header h2 {
+                font-size: 20px;
+            }
+        }
+
+        .sort-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #aaaaaa;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .sort-btn:hover {
+            background-color: #272727;
+        }
+
+        .sort-btn .icon {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Input de comentário */
+        .comment-input-wrapper {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .comment-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ec4899, #f97316);
+            flex-shrink: 0;
+        }
+
+        .comment-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #3a3a3a;
+            padding: 8px 0;
+            color: #f1f1f1;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .comment-input:focus {
+            border-bottom-color: #f1f1f1;
+        }
+
+        .comment-input::placeholder {
+            color: #888888;
+        }
+
+        /* Comentários */
+        .comments-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .comment {
+            display: flex;
+            gap: 12px;
+        }
+
+        .comment-avatar-small {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .comment-body {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .comment-author {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+        }
+
+        .comment-author .name {
+            font-weight: 500;
+        }
+
+        .comment-author .time {
+            color: #888888;
+            font-size: 12px;
+        }
+
+        .comment-text {
+            font-size: 14px;
+            margin-top: 4px;
+            line-height: 1.5;
+            white-space: pre-line;
+        }
+
+        .comment-actions {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 6px;
+        }
+
+        .comment-actions button {
+            background: none;
+            border: none;
+            color: #888888;
+            cursor: pointer;
+            padding: 6px 8px;
+            border-radius: 50%;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+        }
+
+        .comment-actions button:hover {
+            background-color: #272727;
+        }
+
+        .comment-actions .icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        .reply-btn {
+            font-size: 12px;
+            font-weight: 500;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            background: none;
+            border: none;
+            color: #f1f1f1;
+            cursor: pointer;
+        }
+
+        .reply-btn:hover {
+            background-color: #272727;
+        }
+
+        .show-replies {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #3ea6ff;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .show-replies:hover {
+            background-color: rgba(62, 166, 255, 0.1);
+        }
+
+        .show-replies .icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 480px) {
+            .cta-button {
+                font-size: 0.9rem;
+                padding: 14px 20px;
+            }
+            .cta-container {
+                padding: 12px 16px;
+            }
+            .video-title {
+                font-size: 14px;
+            }
+            .channel-row {
+                flex-wrap: wrap;
+            }
+            .subscribe-btn {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+        }
+
+        /* Scrollbar escondida */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- VÍDEO -->
+        <div class="video-wrapper">
+            <video id="mainVideo" controls playsinline>
+                <source src="../video/mr.mp4" type="video/mp4">
+                Seu navegador não suporta vídeos HTML5.
+            </video>
+        </div>
+
+        <!-- CTA - aparece após 3min45s (225s) -->
+        <div class="cta-container" id="ctaContainer">
+            <a href="https://klonepay.com/p/seus-melhores-conteudos-60ff84" target="_blank" class="cta-button">
+                <span class="icon">🎯</span>
+                COMPRAR AGORA
+                <span class="icon">→</span>
+            </a>
+            <p class="cta-text">⚠️ Oferta por tempo limitado! Não perca esta oportunidade.</p>
+        </div>
+
+        <!-- CONTEÚDO -->
+        <div class="content">
+            <!-- Título -->
+            <h1 class="video-title">🚨 URGENTE: Como sacar seu prémio do Money Program (Passo a Passo)</h1>
+
+            <!-- Meta -->
+            <div class="video-meta">
+                <span>698 mil visualizações</span>
+                <span>•</span>
+                <span>há 2 dias</span>
+                <span class="ml-1">…mais</span>
+            </div>
+
+            <!-- Canal -->
+            <div class="channel-row">
+                <div class="channel-info">
+                    <img src="../imagem/mrbeast-logo.png" alt="MrBeast" class="channel-avatar">
+                    <div>
+                        <div class="channel-name">
+                            MrBeast
+                            <svg class="channel-badge" viewBox="0 0 24 24">
+                                <path d="M12 2l2.39 2.45 3.44-.06.06 3.44L20.34 10l-2.45 2.39.06 3.44-3.44.06L12 18.34l-2.39-2.45-3.44-.06-.06-3.44L3.66 10l2.45-2.39-.06-3.44 3.44-.06L12 2zm-1.2 12.2l5.66-5.66-1.42-1.42-4.24 4.24-2.12-2.12-1.42 1.42 3.54 3.54z"/>
+                            </svg>
+                        </div>
+                        <div class="channel-subs">501 mi de inscritos</div>
+                    </div>
+                </div>
+                <button class="subscribe-btn">
+                    <svg class="bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M10.268 21a2 2 0 0 0 3.464 0"/>
+                        <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/>
+                    </svg>
+                    Inscrito
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                        <path d="M6 9l6 6 6-6"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Ações do vídeo -->
+            <div class="video-actions no-scrollbar">
+                <button class="action-btn like-btn">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/>
+                        <path d="M7 10v12"/>
+                    </svg>
+                    47 mil
+                </button>
+                <button class="action-btn dislike-btn">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22a3.13 3.13 0 0 1-3-3.88Z"/>
+                        <path d="M17 14V2"/>
+                    </svg>
+                </button>
+                <button class="action-btn">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="18" cy="5" r="3"/>
+                        <circle cx="6" cy="12" r="3"/>
+                        <circle cx="18" cy="19" r="3"/>
+                        <line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/>
+                        <line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/>
+                    </svg>
+                    Compartilhar
+                </button>
+                <button class="action-btn">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 3a2 2 0 0 1 2 2v15a1 1 0 0 1-1.496.868l-4.512-2.578a2 2 0 0 0-1.984 0l-4.512 2.578A1 1 0 0 1 5 20V5a2 2 0 0 1 2-2z"/>
+                    </svg>
+                    Salvar
+                </button>
+            </div>
+
+            <!-- COMENTÁRIOS -->
+            <div class="comments-section">
+                <div class="comments-header">
+                    <h2>2.847 comentários</h2>
+                    <button class="sort-btn">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 6h18M6 12h12M10 18h4"/>
+                        </svg>
+                        Classificar por
+                    </button>
+                </div>
+
+                <!-- Input comentário -->
+                <div class="comment-input-wrapper">
+                    <div class="comment-avatar"></div>
+                    <input class="comment-input" placeholder="Adicione um comentário…">
+                </div>
+
+                <!-- Lista de comentários -->
+                <div class="comments-list">
+                    <!-- Comentário 1 - Fixado -->
+                    <div class="comment">
+                        <img src="https://i.postimg.cc/d0GptLVW/Whats-App-Image-2026-07-06-at-17-22-46.jpg" class="comment-avatar-small" alt="">
+                        <div class="comment-body">
+                            <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+                                <span style="font-size:11px;color:#888;display:flex;align-items:center;gap:4px;">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6h1.6v-6H18v-2l-2-2z"/></svg>
+                                    Fixado por MrBeast
+                                </span>
+                            </div>
+                            <div class="comment-author">
+                                <span class="name">@carlitosmucavele</span>
+                                <span class="time">há 2 horas</span>
+                            </div>
+                            <p class="comment-text">Assisti até o fim, paguei o imposto de 297 MT e recebi 75.000 MT no meu M-Pesa em menos de 10 minutos! Muito obrigado MrBeast 🙏🙏</p>
+                            <div class="comment-actions">
+                                <button><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/><path d="M7 10v12"/></svg>1,2 mil</button>
+                                <button><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22a3.13 3.13 0 0 1-3-3.88Z"/><path d="M17 14V2"/></svg></button>
+                                <button class="reply-btn">Responder</button>
+                            </div>
+                            <button class="show-replies">
+                                <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                                47 respostas
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Comentário 2 -->
+                    <div class="comment">
+                        <img src="https://i.postimg.cc/MKXLfsGm/Whats-App-Image-2026-07-06-at-17-22-46.jpg" class="comment-avatar-small" alt="">
+                        <div class="comment-body">
+                            <div class="comment-author">
+                                <span class="name">@joanatembe</span>
+                                <span class="time">há 5 horas</span>
+                            </div>
+                            <p class="comment-text">Eu não acreditava mas paguei os 297mt e me caiu o valor mesmo. Já tô comprando coisas pra minha família ❤️</p>
+                            <div class="comment-actions">
+                                <button><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/><path d="M7 10v12"/></svg>987</button>
+                                <button><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22a3.13 3.13 0 0 1-3-3.88Z"/><path d="M17 14V2"/></svg></button>
+                                <button class="reply-btn">Responder</button>
+                            </div>
+                            <button class="show-replies">
+                                <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                                23 respostas
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Comentário 3 -->
+                    <div class="comment">
+                        <img src="https://i.postimg.cc/6qqMR3tg/Whats-App-Image-2026-07-06-at-17-22-47.jpg" class="comment-avatar-small" alt="">
+                        <div class="comment-body">
+                            <div class="comment-author">
+                                <span class="name">@anselmomacuacua</span>
+                                <span class="time">há 8 horas</span>
+                            </div>
+                            <p class="comment-text">Galera, é real! Assistam até o final, paguem o imposto de 297mt e recebem na hora. Já saquei 50.000 MT pelo e-Mola.</p>
+                            <div class="comment-actions">
+                                <button><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/><path d="M7 10v12"/></svg>743</button>
+                                <button><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22a3.13 3.13 0 0 1-3-3.88Z"/><path d="M17 14V2"/></svg></button>
+                                <button class="reply-btn">Responder</button>
+                            </div>
+                            <button class="show-replies">
+                                <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                                31 respostas
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Comentário 4 -->
+                    <div class="comment">
+                        <img src="https://ui-avatars.com/api/?name=Telma+Chirindza&background=random&size=40" class="comment-avatar-small" alt="">
+                        <div class="comment-body">
+                            <div class="comment-author">
+                                <span class="name">@telmachirindza</span>
+                                <span class="time">há 11 horas</span>
+                            </div>
+                            <p class="comment-text">MEU DEUS QUE EMOÇÃO 😭 Paguei o imposto e o dinheiro caiu mesmo. MrBeast é o melhor!</p>
+                            <div class="comment-actions">
+                                <button><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/><path d="M7 10v12"/></svg>612</button>
+                                <button><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22a3.13 3.13 0 0 1-3-3.88Z"/><path d="M17 14V2"/></svg></button>
+                                <button class="reply-btn">Responder</button>
+                            </div>
+                            <button class="show-replies">
+                                <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                                18 respostas
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // MOSTRAR CTA APÓS 3min45s (225 segundos)
+        const video = document.getElementById('mainVideo');
+        const ctaContainer = document.getElementById('ctaContainer');
+        const CTA_TIME = 225; // 3 minutos e 45 segundos
+        let ctaShown = false;
+
+        video.addEventListener('timeupdate', function() {
+            if (!ctaShown && video.currentTime >= CTA_TIME) {
+                ctaContainer.classList.add('visible');
+                ctaShown = true;
+            }
+        });
+
+        // Se o vídeo já estiver além do tempo quando carregar
+        video.addEventListener('loadedmetadata', function() {
+            if (video.currentTime >= CTA_TIME) {
+                ctaContainer.classList.add('visible');
+                ctaShown = true;
+            }
+        });
+
+        // Se o usuário pular para frente
+        video.addEventListener('seeked', function() {
+            if (!ctaShown && video.currentTime >= CTA_TIME) {
+                ctaContainer.classList.add('visible');
+                ctaShown = true;
+            }
+        });
+    </script>
+</body>
+</html>

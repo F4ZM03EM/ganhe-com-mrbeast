@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarefa 1 · Inscreva-se no MrBeast</title>
+    <style>
+        /* Reset e estilos base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 32px 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Logo */
+        .logo {
+            height: 80px;
+            width: auto;
+        }
+
+        /* Saldo */
+        .balance-badge {
+            margin-top: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #f0fdf4;
+            padding: 6px 16px;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: #15803d;
+            border: 1px solid #bbf7d0;
+        }
+
+        /* Títulos */
+        .task-label {
+            margin-top: 24px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #737373;
+        }
+
+        .task-title {
+            margin-top: 8px;
+            font-size: 1.875rem;
+            font-weight: 900;
+            letter-spacing: -0.025em;
+            color: #171717;
+        }
+
+        .task-description {
+            margin-top: 8px;
+            font-size: 0.875rem;
+            color: #525252;
+        }
+
+        .task-description b {
+            color: #171717;
+        }
+
+        /* Imagem do canal */
+        .channel-image-wrapper {
+            margin-top: 24px;
+            width: 100%;
+            border-radius: 16px;
+            border: 1px solid #e5e5e5;
+            overflow: hidden;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        .channel-image {
+            width: 100%;
+            display: block;
+        }
+
+        /* Botão */
+        .button-wrapper {
+            margin-top: 32px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn-primary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 16px 20px;
+            border: none;
+            border-radius: 16px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: white;
+            background: #dc2626;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.01);
+        }
+
+        .btn-primary:active {
+            transform: scale(0.99);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-icon {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
+        .btn-text {
+            flex-shrink: 0;
+        }
+
+        .helper-text {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #737373;
+        }
+
+        /* SVG inline para o ícone do YouTube */
+        .icon-youtube {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+            flex-shrink: 0;
+        }
+
+        /* Responsividade */
+        @media (max-width: 640px) {
+            .task-title {
+                font-size: 1.5rem;
+            }
+            
+            .logo {
+                height: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Logo -->
+        <img src="../imagem/mrbeast-logo.png" alt="Mr Beast Money Program" class="logo">
+
+        <!-- Saldo -->
+        <div class="balance-badge">
+            Saldo: $300.00
+        </div>
+
+        <!-- Títulos -->
+        <div class="task-label">Tarefa 1 de 6</div>
+        <h1 class="task-title">Inscreva-se no canal</h1>
+        <p class="task-description">
+            Inscreva-se no canal oficial do MrBeast e ganhe <b>$50</b>.
+        </p>
+
+        <!-- Imagem do canal -->
+        <div class="channel-image-wrapper">
+            <img 
+                src="../imagem/mrbeast-channel.png" 
+                alt="Canal MrBeast" 
+                class="channel-image"
+            >
+        </div>
+
+        <!-- Botão - REDIRECIONA PARA "assisir1/index.html" -->
+        <div class="button-wrapper">
+            <a href="../assistir1/index.html" class="btn-primary">
+                <svg class="icon-youtube" viewBox="0 0 24 24">
+                    <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path>
+                    <path d="m10 15 5-3-5-3z"></path>
+                </svg>
+                Inscrever-se no canal
+            </a>
+            <p class="helper-text">Clique para se inscrever e receber seu prêmio.</p>
+        </div>
+    </div>
+</body>
+</html>

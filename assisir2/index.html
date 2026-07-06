@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assista o vídeo · MrBeast</title>
+    <style>
+        /* Reset e estilos base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 32px 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Logo */
+        .logo {
+            height: 80px;
+            width: auto;
+        }
+
+        /* Saldo */
+        .balance-badge {
+            margin-top: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #f0fdf4;
+            padding: 6px 16px;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: #15803d;
+            border: 1px solid #bbf7d0;
+        }
+
+        /* Títulos */
+        .task-label {
+            margin-top: 24px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #737373;
+        }
+
+        .task-title {
+            margin-top: 8px;
+            font-size: 1.875rem;
+            font-weight: 900;
+            letter-spacing: -0.025em;
+            color: #171717;
+            text-align: center;
+        }
+
+        .task-description {
+            margin-top: 8px;
+            font-size: 0.875rem;
+            color: #525252;
+            text-align: center;
+        }
+
+        .task-description b {
+            color: #171717;
+        }
+
+        /* Card do vídeo */
+        .video-card {
+            margin-top: 24px;
+            width: 100%;
+            border-radius: 16px;
+            border: 1px solid #e5e5e5;
+            overflow: hidden;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            display: block;
+        }
+
+        .video-info {
+            padding: 12px 16px;
+            background-color: #ffffff;
+        }
+
+        .video-title {
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: #171717;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .video-meta {
+            margin-top: 4px;
+            font-size: 0.75rem;
+            color: #737373;
+        }
+
+        /* Botões */
+        .buttons-wrapper {
+            margin-top: 32px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .btn-like,
+        .btn-dislike {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 20px 16px;
+            border: none;
+            border-radius: 16px;
+            font-size: 1rem;
+            font-weight: 700;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s ease;
+        }
+
+        .btn-like:hover,
+        .btn-dislike:hover {
+            transform: scale(1.02);
+        }
+
+        .btn-like:active,
+        .btn-dislike:active {
+            transform: scale(0.98);
+        }
+
+        .btn-like {
+            background: #dc2626;
+            color: white;
+        }
+
+        .btn-dislike {
+            background: #e5e5e5;
+            color: #262626;
+        }
+
+        .btn-like:disabled,
+        .btn-dislike:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-icon {
+            width: 28px;
+            height: 28px;
+            flex-shrink: 0;
+        }
+
+        .btn-like .btn-icon {
+            stroke: white;
+        }
+
+        .btn-dislike .btn-icon {
+            stroke: #262626;
+        }
+
+        /* SVG inline para os ícones */
+        .icon-thumbs-up,
+        .icon-thumbs-down {
+            width: 28px;
+            height: 28px;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+            flex-shrink: 0;
+        }
+
+        .icon-thumbs-up {
+            stroke: currentColor;
+        }
+
+        .icon-thumbs-down {
+            stroke: currentColor;
+        }
+
+        /* Animações de queda de dinheiro */
+        .money-rain {
+            pointer-events: none;
+            position: fixed;
+            inset: 0;
+            z-index: 50;
+            overflow: hidden;
+        }
+
+        .money-item {
+            position: absolute;
+            top: -10%;
+            animation: money-fall linear forwards;
+        }
+
+        @keyframes money-fall {
+            to {
+                transform: translateY(120vh) rotate(720deg);
+            }
+        }
+
+        /* Responsividade */
+        @media (max-width: 640px) {
+            .task-title {
+                font-size: 1.5rem;
+            }
+            
+            .logo {
+                height: 60px;
+            }
+
+            .buttons-wrapper {
+                gap: 8px;
+            }
+
+            .btn-like,
+            .btn-dislike {
+                padding: 16px 12px;
+                font-size: 0.875rem;
+            }
+
+            .btn-icon {
+                width: 24px;
+                height: 24px;
+            }
+
+            .icon-thumbs-up,
+            .icon-thumbs-down {
+                width: 24px;
+                height: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Logo -->
+        <img src="../imagem/mrbeast-logo.png" alt="Mr Beast Money Program" class="logo">
+
+        <!-- Saldo -->
+        <div class="balance-badge">
+            Saldo: $300.00
+        </div>
+
+        <!-- Títulos -->
+        <div class="task-label">Tarefa 3 de 6</div>
+        <h1 class="task-title">Você gostou do vídeo?</h1>
+        <p class="task-description">
+            Avalie o vídeo abaixo e ganhe <b>$50</b>.
+        </p>
+
+        <!-- Card do vídeo -->
+        <div class="video-card">
+            <img 
+                src="../imagem/hqdefault_1.avif" 
+                alt="Última Pessoa a Sair do Círculo Ganha $500.000" 
+                class="video-thumbnail"
+            >
+            <div class="video-info">
+                <div class="video-title">Última Pessoa a Sair do Círculo Ganha $500.000</div>
+                <div class="video-meta">MrBeast · 120M visualizações</div>
+            </div>
+        </div>
+
+        <!-- Botões - AMBOS REDIRECIONAM PARA "assisir3/index.html" -->
+        <div class="buttons-wrapper">
+            <a href="../assisir3/index.html" class="btn-like">
+                <svg class="icon-thumbs-up" viewBox="0 0 24 24">
+                    <path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"></path>
+                    <path d="M7 10v12"></path>
+                </svg>
+                Gostei
+            </a>
+            <a href="../assisir3/index.html" class="btn-dislike">
+                <svg class="icon-thumbs-down" viewBox="0 0 24 24">
+                    <path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22a3.13 3.13 0 0 1-3-3.88Z"></path>
+                    <path d="M17 14V2"></path>
+                </svg>
+                Não gostei
+            </a>
+        </div>
+    </div>
+
+    <!-- Efeito de chuva de dinheiro -->
+    <div class="money-rain" id="moneyRain">
+        <span class="money-item" style="left:35.6347%; font-size:44.6333px; transform:rotate(145.127deg); animation-duration:0.422418s; animation-delay:0.0639537s;">💸</span>
+        <span class="money-item" style="left:61.5424%; font-size:44.9727px; transform:rotate(97.3651deg); animation-duration:0.377721s; animation-delay:0.0068398s;">💸</span>
+        <span class="money-item" style="left:8.87638%; font-size:25.3014px; transform:rotate(169.13deg); animation-duration:0.452141s; animation-delay:0.0565005s;">💸</span>
+        <span class="money-item" style="left:22.2475%; font-size:35.1195px; transform:rotate(61.1912deg); animation-duration:0.379116s; animation-delay:0.0328667s;">💵</span>
+        <span class="money-item" style="left:71.333%; font-size:34.3127px; transform:rotate(299.854deg); animation-duration:0.395074s; animation-delay:0.0168994s;">💵</span>
+        <span class="money-item" style="left:11.7419%; font-size:38.3789px; transform:rotate(190.762deg); animation-duration:0.351284s; animation-delay:0.0729194s;">💸</span>
+        <span class="money-item" style="left:17.6788%; font-size:46.6017px; transform:rotate(76.5431deg); animation-duration:0.392311s; animation-delay:0.0750716s;">💵</span>
+        <span class="money-item" style="left:51.6897%; font-size:33.8065px; transform:rotate(92.4225deg); animation-duration:0.461178s; animation-delay:0.0665598s;">💵</span>
+        <span class="money-item" style="left:65.463%; font-size:34.9623px; transform:rotate(102.467deg); animation-duration:0.4296s; animation-delay:0.0708583s;">💵</span>
+        <span class="money-item" style="left:70.9678%; font-size:42.5168px; transform:rotate(192.641deg); animation-duration:0.467683s; animation-delay:0.0601791s;">💵</span>
+        <span class="money-item" style="left:2.84106%; font-size:33.5116px; transform:rotate(81.7857deg); animation-duration:0.496572s; animation-delay:0.0433085s;">💸</span>
+        <span class="money-item" style="left:6.02348%; font-size:45.5537px; transform:rotate(242.843deg); animation-duration:0.402574s; animation-delay:0.0481996s;">💵</span>
+        <span class="money-item" style="left:5.42624%; font-size:31.7802px; transform:rotate(227.67deg); animation-duration:0.362855s; animation-delay:0.00741152s;">💵</span>
+        <span class="money-item" style="left:74.0634%; font-size:32.9326px; transform:rotate(285.028deg); animation-duration:0.437002s; animation-delay:0.00748052s;">💸</span>
+        <span class="money-item" style="left:89.8353%; font-size:31.229px; transform:rotate(45.6925deg); animation-duration:0.401482s; animation-delay:0.0653347s;">💸</span>
+        <span class="money-item" style="left:61.2802%; font-size:39.9114px; transform:rotate(137.177deg); animation-duration:0.426148s; animation-delay:0.0684065s;">💵</span>
+        <span class="money-item" style="left:39.2148%; font-size:34.6236px; transform:rotate(191.218deg); animation-duration:0.356282s; animation-delay:0.0586407s;">💵</span>
+        <span class="money-item" style="left:27.1658%; font-size:27.2927px; transform:rotate(273.966deg); animation-duration:0.444325s; animation-delay:0.02628s;">💵</span>
+        <span class="money-item" style="left:67.2711%; font-size:35.9977px; transform:rotate(256.95deg); animation-duration:0.368096s; animation-delay:0.0552703s;">💸</span>
+        <span class="money-item" style="left:92.6019%; font-size:44.3431px; transform:rotate(281.924deg); animation-duration:0.39374s; animation-delay:0.0430785s;">💵</span>
+        <span class="money-item" style="left:18.5417%; font-size:38.3279px; transform:rotate(138.937deg); animation-duration:0.490326s; animation-delay:0.0596686s;">💵</span>
+        <span class="money-item" style="left:48.408%; font-size:37.874px; transform:rotate(85.689deg); animation-duration:0.386374s; animation-delay:0.00252643s;">💵</span>
+        <span class="money-item" style="left:47.1255%; font-size:42.353px; transform:rotate(321.19deg); animation-duration:0.443527s; animation-delay:0.0711397s;">💸</span>
+        <span class="money-item" style="left:15.5684%; font-size:29.5655px; transform:rotate(101.78deg); animation-duration:0.360434s; animation-delay:0.0508199s;">💸</span>
+        <span class="money-item" style="left:36.0066%; font-size:35.2772px; transform:rotate(132.599deg); animation-duration:0.400827s; animation-delay:0.00380507s;">💵</span>
+        <span class="money-item" style="left:35.054%; font-size:46.794px; transform:rotate(334.812deg); animation-duration:0.478698s; animation-delay:0.0229151s;">💸</span>
+        <span class="money-item" style="left:6.34876%; font-size:30.1228px; transform:rotate(307.746deg); animation-duration:0.477968s; animation-delay:0.0516103s;">💵</span>
+        <span class="money-item" style="left:64.4446%; font-size:28.9053px; transform:rotate(74.1309deg); animation-duration:0.397203s; animation-delay:0.0692812s;">💸</span>
+    </div>
+</body>
+</html>
