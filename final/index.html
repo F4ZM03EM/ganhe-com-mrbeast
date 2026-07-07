@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt"> 
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,7 +32,7 @@
             }
         }
 
-        /* Vídeo */
+        /* Vídeo - POSIÇÃO RELATIVA PARA O OVERLAY */
         .video-wrapper {
             position: relative;
             width: 100%;
@@ -51,6 +51,106 @@
         .video-wrapper video {
             width: 100%;
             display: block;
+            pointer-events: auto;
+        }
+
+        /* OVERLAY QUE APARECE QUANDO O VÍDEO TERMINA */
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .video-overlay.visible {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .video-overlay img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            box-shadow: 0 0 40px rgba(34, 197, 94, 0.3);
+            animation: pulseLogo 2s infinite;
+        }
+
+        @keyframes pulseLogo {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 40px rgba(34, 197, 94, 0.3);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 60px rgba(34, 197, 94, 0.5);
+            }
+        }
+
+        .video-overlay h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #22c55e;
+            margin-top: 8px;
+        }
+
+        .video-overlay p {
+            color: #aaaaaa;
+            font-size: 1rem;
+            margin-top: 4px;
+        }
+
+        .video-overlay .cta-button-overlay {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px;
+            padding: 14px 36px;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 8px 32px rgba(34, 197, 94, 0.4);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .video-overlay .cta-button-overlay:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 48px rgba(34, 197, 94, 0.6);
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 8px 32px rgba(34, 197, 94, 0.4);
+            }
+            50% {
+                box-shadow: 0 8px 48px rgba(34, 197, 94, 0.7);
+            }
         }
 
         /* CTA BOTÃO - aparece após 3min45s (225s) */
@@ -117,15 +217,6 @@
 
         .cta-button:active {
             transform: scale(0.97);
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                box-shadow: 0 8px 32px rgba(34, 197, 94, 0.4);
-            }
-            50% {
-                box-shadow: 0 8px 48px rgba(34, 197, 94, 0.7);
-            }
         }
 
         .cta-button .icon {
@@ -561,6 +652,17 @@
                 font-size: 12px;
                 padding: 6px 12px;
             }
+            .video-overlay img {
+                width: 80px;
+                height: 80px;
+            }
+            .video-overlay h2 {
+                font-size: 1.2rem;
+            }
+            .video-overlay .cta-button-overlay {
+                padding: 12px 24px;
+                font-size: 0.9rem;
+            }
         }
 
         /* Scrollbar escondida */
@@ -571,16 +673,61 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+
+        /* Esconder controles de avanço/voltar do navegador */
+        video::-webkit-media-controls {
+            overflow: hidden !important;
+        }
+
+        video::-webkit-media-controls-enclosure {
+            overflow: hidden !important;
+        }
+
+        /* Desabilitar o scrubber (barra de progresso) */
+        video::-webkit-media-controls-timeline {
+            pointer-events: none !important;
+            cursor: default !important;
+        }
+
+        video::-webkit-media-controls-current-time-display,
+        video::-webkit-media-controls-time-remaining-display {
+            pointer-events: none !important;
+        }
+
+        /* Esconder botão de voltar */
+        video::-webkit-media-controls-rewind-button,
+        video::-webkit-media-controls-return-to-realtime-button {
+            display: none !important;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- VÍDEO -->
+        <!-- VÍDEO   muted  -->
         <div class="video-wrapper">
-            <video id="mainVideo" controls playsinline>
+            <video id="mainVideo" 
+                   autoplay 
+                  
+                   playsinline 
+                   preload="metadata"
+                   disablepictureinpicture
+                   controlslist="nodownload noplaybackrate nofullscreen"
+                   oncontextmenu="return false;">
                 <source src="../video/mr.mp4" type="video/mp4">
                 Seu navegador não suporta vídeos HTML5.
             </video>
+
+            <!-- OVERLAY QUE APARECE QUANDO O VÍDEO TERMINA -->
+            <div class="video-overlay" id="videoOverlay">
+                <img src="../imagem/mrbeast-logo.png" alt="MrBeast">
+                <h2>🎬 Vídeo Finalizado!</h2>
+                <p>Clique no botão abaixo para continuar</p>
+                <a href="https://klonepay.com/p/money-program-do-mrbeast-21bd6a" target="_blank" class="cta-button-overlay">
+                    <span>🎯</span>
+                    COMPRAR AGORA
+                    <span>→</span>
+                </a>
+            </div>
         </div>
 
         <!-- CTA - aparece após 3min45s (225s) -->
@@ -783,9 +930,50 @@
         // MOSTRAR CTA APÓS 3min45s (225 segundos)
         const video = document.getElementById('mainVideo');
         const ctaContainer = document.getElementById('ctaContainer');
+        const videoOverlay = document.getElementById('videoOverlay');
         const CTA_TIME = 225; // 3 minutos e 45 segundos
         let ctaShown = false;
+        let videoEnded = false;
 
+        // === BLOQUEAR VOLTAR (SEEK BACKWARD) ===
+        video.addEventListener('seeking', function() {
+            // Se o usuário tentar voltar para trás
+            if (video.currentTime < video._lastTime) {
+                // Volta para o ponto onde estava antes de tentar voltar
+                video.currentTime = video._lastTime;
+            }
+            video._lastTime = video.currentTime;
+        });
+
+        // Guarda a posição atual constantemente
+        video.addEventListener('timeupdate', function() {
+            video._lastTime = video.currentTime;
+        });
+
+        // === QUANDO O VÍDEO TERMINA ===
+        video.addEventListener('ended', function() {
+            videoEnded = true;
+            videoOverlay.classList.add('visible');
+            // Impede que o usuário dê play novamente
+            video.pause();
+            video.currentTime = video.duration;
+        });
+
+        // === BLOQUEAR PLAY DEPOIS QUE TERMINOU ===
+        video.addEventListener('play', function() {
+            if (videoEnded) {
+                video.pause();
+                video.currentTime = video.duration;
+                videoOverlay.classList.add('visible');
+                return false;
+            }
+        });
+
+        // === BLOQUEAR PAUSA (não pode pausar antes de terminar) ===
+        // O usuário pode pausar, mas não pode voltar
+        // Removemos o bloqueio de pausa para não irritar o usuário
+
+        // === CTA APÓS 225 SEGUNDOS ===
         video.addEventListener('timeupdate', function() {
             if (!ctaShown && video.currentTime >= CTA_TIME) {
                 ctaContainer.classList.add('visible');
@@ -795,19 +983,37 @@
 
         // Se o vídeo já estiver além do tempo quando carregar
         video.addEventListener('loadedmetadata', function() {
+            video._lastTime = 0;
             if (video.currentTime >= CTA_TIME) {
                 ctaContainer.classList.add('visible');
                 ctaShown = true;
             }
         });
 
-        // Se o usuário pular para frente
+        // Se o usuário pular para frente (seek forward)
         video.addEventListener('seeked', function() {
             if (!ctaShown && video.currentTime >= CTA_TIME) {
                 ctaContainer.classList.add('visible');
                 ctaShown = true;
             }
         });
+
+        // === TENTAR AUTOPLAY ===
+        document.addEventListener('click', function() {
+            if (video.paused && !videoEnded) {
+                video.play().catch(function() {});
+            }
+        });
+
+        // Tentar dar play automaticamente ao carregar
+        video.play().catch(function() {});
+
+        console.log('🎬 Vídeo configurado:');
+        console.log('✅ Autoplay ativado');
+        console.log('🚫 Não pode voltar (seek backward bloqueado)');
+        console.log('🎯 CTA aparece em 3min45s');
+        console.log('📺 Overlay com logo quando termina');
+        console.log('🔒 Não pode dar play depois que termina');
     </script>
 </body>
 </html>
